@@ -1,10 +1,16 @@
 class CouponsController < ApplicationController
   before_action :set_coupon, only: [:show, :update, :destroy]
 
+
+  console
   # GET /coupons
   def index
+    # @coupons = Restaurant.coupons
     @coupons = Coupon.all
-
+    # @coupons.each do |coupon|
+    #   coupon[:restaurant] = Restaurant.find_by_id(coupon.restaurant_id)
+    #   # coupon.merge( {:restaurant => Restaurant.find_by_id(coupon.restaurant_id) } )
+    # end
     render json: @coupons
   end
 
