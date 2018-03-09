@@ -1,4 +1,7 @@
+require 'geokit'
+
 class RestaurantsController < ApplicationController
+  include Geokit::Geocoders
   before_action :set_restaurant, only: [:show, :update, :destroy]
 
   # GET /restaurants
@@ -16,6 +19,8 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    get_lat_lng(@restaurant)
+    puts @restaurant
 
     if @restaurant.save
       render json: @restaurant, status: :created, location: @restaurant
@@ -46,6 +51,22 @@ class RestaurantsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :username, :email, :password, :phone, :address, :balance, :longitude, :latitude)
+      params.permit(
+        :name, 
+        :username, 
+        :email, 
+        :password, 
+        :phone, 
+        :address, 
+        :balance, 
+        :longitude, 
+        :latitude
+        )
+    end
+
+    def get_lat_lng(restaurant)
+        coords = GoogleGeocoder.geocode(restaurant.address)
+        @restaurant.latitude = coords.lat
+        @restaurant.longitude = coords.lng
     end
 end

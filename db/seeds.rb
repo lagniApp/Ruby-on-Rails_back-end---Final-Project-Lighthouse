@@ -28,6 +28,7 @@ restaurant1 = Restaurant.create!({
   username: 'Diego',
   email: 'bk@diego.com',
   password: 'password',
+
   phone: '6479671111',
   address: '46 Spadina Ave.',
   longitude: -79.39500357,
