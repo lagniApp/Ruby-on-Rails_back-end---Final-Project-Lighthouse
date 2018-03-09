@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  quantity: 1
+  remaining: 2018-03-09 17:07:28
+  restaurant: one
+
+two:
+  description: MyText
+  quantity: 1
+  remaining: 2018-03-09 17:07:28
+  restaurant: two
