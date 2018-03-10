@@ -28,7 +28,6 @@ restaurant1 = Restaurant.create!({
   username: 'Diego',
   email: 'bk@diego.com',
   password: 'password',
-  balance: nil,
   phone: '6479671111',
   address: '46 Spadina Ave.',
   balance: 49,

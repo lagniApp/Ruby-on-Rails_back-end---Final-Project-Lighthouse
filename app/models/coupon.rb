@@ -8,7 +8,7 @@ class Coupon < ApplicationRecord
   end
 
   def tags
-    @coupon = Coupon.all
+    Tag.all
 
     # books.includes(:user).where('users.name="Guava"').references(:user)
 
