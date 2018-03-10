@@ -28,7 +28,7 @@ restaurant1 = Restaurant.create!({
   username: 'Diego',
   email: 'bk@diego.com',
   password: 'password',
-
+  balance: nil,
   phone: '6479671111',
   address: '46 Spadina Ave.',
   longitude: -79.39500357,
@@ -42,7 +42,7 @@ restaurant2 = Restaurant.create!({
   password: "123456789",
   phone: "6478799876",
   address: "522 King St W, Toronto, ON M5V 1L7",
-  balance: null,
+  balance: nil,
   longitude: -79.3974043,
   latitude: 43.6452414
 })
@@ -54,7 +54,7 @@ restaurant3 = Restaurant.create!({
   password: "123456789",
   phone: "8726481118",
   address: "1 Benvenuto Pl, Toronto, ON M4V 2L1",
-  balance: null,
+  balance: nil,
   longitude: -79.4002503,
   latitude: 43.6814114,
 })

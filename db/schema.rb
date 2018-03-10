@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20180309172015) do
     t.string "password"
     t.string "phone"
     t.string "address"
+    t.json "meetups"
     t.float "balance"
     t.decimal "longitude"
     t.decimal "latitude"
