@@ -31,6 +31,7 @@ restaurant1 = Restaurant.create!({
   balance: nil,
   phone: '6479671111',
   address: '46 Spadina Ave.',
+  balance: 49,
   longitude: -79.39500357,
   latitude: 43.64480087
 })
@@ -42,7 +43,7 @@ restaurant2 = Restaurant.create!({
   password: "123456789",
   phone: "6478799876",
   address: "522 King St W, Toronto, ON M5V 1L7",
-  balance: nil,
+  balance: 30,
   longitude: -79.3974043,
   latitude: 43.6452414
 })
@@ -54,7 +55,7 @@ restaurant3 = Restaurant.create!({
   password: "123456789",
   phone: "8726481118",
   address: "1 Benvenuto Pl, Toronto, ON M4V 2L1",
-  balance: nil,
+  balance: 35,
   longitude: -79.4002503,
   latitude: 43.6814114,
 })
@@ -62,6 +63,15 @@ restaurant3 = Restaurant.create!({
 
 tag1 = Tag.create!({
   cuisine: 'Pizza'
+})
+tag2 = Tag.create!({
+  cuisine: 'Burrito'
+})
+tag3 = Tag.create!({
+  cuisine: 'Hamburger'
+})
+tag4 = Tag.create!({
+  cuisine: 'Wine'
 })
 
 
@@ -82,7 +92,7 @@ coupon1 = restaurant1.coupons.create!({
   remaining: '2011'
 })
 coupon2 = restaurant1.coupons.create!({
-  description: 'More pizza',
+  description: 'More beer for less!',
   quantity: '10',
   remaining: '2011'
 })
@@ -92,4 +102,4 @@ coupon3 = restaurant1.coupons.create!({
   remaining: '2011'
 })
 
-coupon1.tags << tag1
+# coupon1.tags << tag1
