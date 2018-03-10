@@ -89,18 +89,21 @@ class RestaurantsController < ApplicationController
       meetups_arr = []
       @events = MeetupApi.new.open_events(meetup_params)
       while (i < 200) do
-        if  
-          @events["results"][i]["yes_rsvp_count"] && 
+        if @events["results"][i] == nil
+          return meetups_arr
+        end
+        if 
           @events["results"][i]["yes_rsvp_count"] > 30 &&
           @events["results"][i]["name"] != @events["results"][i-1]["name"]
           
           meetups_arr.push({
             name: @events["results"][i]["name"],
-            count: @events["results"][i]["yes_rsvp_count"],
-            distance: @events["results"][i]["distance"].round,
+            ppl_yes: @events["results"][i]["yes_rsvp_count"],
+            distance: @events["results"][i]["distance"] * 100,
             date: time_zone(@events["results"][i]["time"])
           })
         end
+        
         i = i + 1
       end
       return meetups_arr
