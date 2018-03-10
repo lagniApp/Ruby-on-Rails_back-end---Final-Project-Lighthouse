@@ -1,0 +1,2 @@
+class MeetupApi < ApplicationRecord
+end
