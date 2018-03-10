@@ -90,15 +90,20 @@ coupon1 = restaurant1.coupons.create!({
   quantity: '20',
   remaining: '2011'
 })
-coupon2 = restaurant1.coupons.create!({
+coupon2 = restaurant2.coupons.create!({
   description: 'More beer for less!',
   quantity: '10',
   remaining: '2011'
 })
-coupon3 = restaurant1.coupons.create!({
+coupon3 = restaurant3.coupons.create!({
   description: 'Wine',
   quantity: '30',
   remaining: '2011'
 })
 
-# coupon1.tags << tag1
+coupon1.tags << tag1
+coupon1.tags << tag2
+coupon2.tags << tag3
+coupon2.tags << tag4
+coupon3.tags << tag1
+coupon3.tags << tag4
