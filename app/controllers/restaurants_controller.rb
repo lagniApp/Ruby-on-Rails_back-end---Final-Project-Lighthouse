@@ -26,8 +26,10 @@ class RestaurantsController < ApplicationController
     get_lat_lng(@restaurant)
     
     if @restaurant.save
+      session[:restaurant_id] = @restaurant.id
       render json: @restaurant, status: :created, location: @restaurant
     else
+      flash[:error] = 'An error occured!'
       render json: @restaurant.errors, status: :unprocessable_entity
     end
   end
