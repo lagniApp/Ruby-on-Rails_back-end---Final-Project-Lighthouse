@@ -8,4 +8,13 @@ class Restaurant < ApplicationRecord
   validates :phone, presence: true
   validates :address, presence: true
 
+  def authenticate_with_credentials(email, password)
+    restaurant = Restaurant.find_by_email(email.strip.downcase)
+    # If the restaurant exists AND the password entered is correct.
+    if restaurant && restaurant.authenticate(password)
+      return restaurant
+    end
+    nil
+  end
+
 end
