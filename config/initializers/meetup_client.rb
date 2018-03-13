@@ -1,3 +1,3 @@
 MeetupClient.configure do |config|
-  config.api_key = "491e3c79362e21456421c556456e2c"
+  config.api_key = "55d40722f665c12564652673c7b5060"
 end

@@ -90,7 +90,7 @@ class RestaurantsController < ApplicationController
       i = 0
       meetups_arr = []
       @events = MeetupApi.new.open_events(meetup_params)
-      while (i < 200) do
+      while (i < 50) do
         if @events["results"][i] == nil
           return meetups_arr
         end
