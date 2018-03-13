@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   # post 'restaurants' => 'restaurants#login'
   # resources :tags
 
-  # namespace :admin do
-  #   root to: 'dashboard#show'
-  #   resources :products, except: [:edit, :update, :show]
-  #   resources :categories, only: [:index, :new, :create]
-  # end
+  namespace :admin do
+    root to: 'dashboard#show'
+    resources :restaurants, except: [:show]
+  end
 
   root to: 'coupons#index'
 

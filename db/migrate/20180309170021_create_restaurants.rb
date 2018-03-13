@@ -8,6 +8,7 @@ class CreateRestaurants < ActiveRecord::Migration[5.1]
       t.string :phone
       t.string :address
       t.float :balance
+      t.json :couponsJSON
       t.decimal :longitude
       t.decimal :latitude
 

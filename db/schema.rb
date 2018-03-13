@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20180309172015) do
     t.string "phone"
     t.string "address"
     t.float "balance"
+    t.json "couponsJSON"
     t.decimal "longitude"
     t.decimal "latitude"
     t.datetime "created_at", null: false
