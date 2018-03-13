@@ -16,25 +16,44 @@ class RestaurantsController < ApplicationController
     @meetup_params = meetup_params(@restaurant)
     @meets = meetup_api(@meetup_params)
     @restaurant.meetups = @meets
+    @couponsJSON = Coupon.find_by restaurant_id: @restaurant.id
+    @restaurant.couponsJSON = @couponsJSON
+
 
     render json: @restaurant
   end
 
   # POST /restaurants
   def create
-    @restaurant = Restaurant.new(restaurant_params)
-    get_lat_lng(@restaurant)
+    puts params
+    # request.raw_post
+    # data = JSON.parse(data.data)
+    # @restaurant = Restaurant.find_by_email(params[:email])
     
-    if @restaurant.save
-      session[:restaurant_id] = @restaurant.id
-      render json: @restaurant, status: :created, location: @restaurant
+    if @restaurant = Restaurant.authenticate_with_credentials(params[:email], params[:password])
+    # if @restaurant 
+      # puts @restaurant.id
+    # if @restaurant && @restaurant.password === params[:password]
+      # session[:restaurant_id] = @restaurant.id
+      render json: @restaurant, status: :created
+      # , location: "/restaurants/#{@restaurant.id}"
     else
-      flash[:error] = 'An error occured!'
-      render json: @restaurant.errors, status: :unprocessable_entity
+      render json: {error:'Wrong email or password'}
     end
+
+    # @restaurant = Restaurant.new(restaurant_params)
+    # get_lat_lng(@restaurant)
+    
+    # if @restaurant.save
+    #   session[:restaurant_id] = @restaurant.id
+    #   render json: @restaurant, status: :created, location: @restaurant
+    # else
+    #   flash[:error] = 'An error occured!'
+    #   render json: @restaurant.errors, status: :unprocessable_entity
+    # end
   end
 
-  # PATCH/PUT /restaurants/1
+  # PATCH/PUT /restaurants/id
   def update
     if @restaurant.update(restaurant_params)
       render json: @restaurant
