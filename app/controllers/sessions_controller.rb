@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       # Save the restaurant id inside the browser cookie. This is how we keep the restaurant 
       # logged in when they navigate around our website.
       session[:restaurant_id] = restaurant.id
-      redirect_to [:root], notice: 'Login Successful'
+      redirect_to "/restaurant/#{restaurant.id}", notice: 'Login Successful'
     else
     # If restaurant's login doesn't work, send them back to the login form.
       redirect_to '/login'

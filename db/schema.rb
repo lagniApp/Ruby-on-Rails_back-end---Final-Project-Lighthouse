@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 20180309172015) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "phone"
     t.string "address"
-    t.json "meetups"
     t.float "balance"
+    t.json "couponsJSON"
     t.decimal "longitude"
     t.decimal "latitude"
     t.datetime "created_at", null: false
