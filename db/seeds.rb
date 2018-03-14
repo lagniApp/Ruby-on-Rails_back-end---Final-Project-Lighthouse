@@ -8,7 +8,7 @@
 
 # Only run on development (local) instances not on production, etc.
 
-require 'faker'
+rrequire 'faker'
 
 unless Rails.env.development?
   puts "Development seeds only (for now)!"
