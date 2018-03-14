@@ -32,25 +32,16 @@ restaurant_location = [{:latitude => 43.653908, :longitude => -79.384293},
 
 
 5.times do |i|
-  name = Faker::Superhero.name
-  username = Faker::Name.first_name
-  email = Faker::Internet.email
-  password = Faker::Internet.password(8)
-  phone = Faker::PhoneNumber.cell_phone
-  address = Faker::Address.street_address
-  balance = rand(25...60)
-  longitude = restaurant_location[i][:longitude]
-  latitude = restaurant_location[i][:latitude]
   restaurant =  Restaurant.create!({
-      name: name,
-      username: username,
-      email: email,
-      password: password,
-      phone: phone,
-      address: address,
-      balance: balance,
-      longitude: longitude,
-      latitude: latitude
+      name: Faker::Superhero.name,
+      username: Faker::Name.first_name,
+      email: Faker::Internet.email,
+      password: Faker::Internet.password(8),
+      phone: Faker::PhoneNumber.cell_phone,
+      address: Faker::Address.street_address,
+      balance: rand(25...60),
+      longitude: restaurant_location[i][:longitude],
+      latitude: restaurant_location[i][:latitude]
       })
   restaurant_list << restaurant
 end
@@ -105,6 +96,10 @@ end
 # tag4 = Tag.create!({
 #   cuisine: 'Wine'
 # })
+
+taglist = ['beer', 'wine', 'cocktail', 'pizza', 'food',
+  'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
+
 
 
 
