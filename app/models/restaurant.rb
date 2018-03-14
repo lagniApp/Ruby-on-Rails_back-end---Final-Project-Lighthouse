@@ -10,7 +10,6 @@ class Restaurant < ApplicationRecord
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 
   validates :password, presence: true,
-          :presence => { :on => :create },
           :length   => { :minimum => 6, :allow_nil => true }
   validates :email, :presence => true,
           :format => { :with => email_regex },
