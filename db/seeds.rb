@@ -97,9 +97,13 @@ end
 #   cuisine: 'Wine'
 # })
 
-taglist = ['beer', 'wine', 'cocktail', 'pizza', 'food',
+tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
+tag_list = []
 
+tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
+  tag_list << newTag
+}
 
 
 
