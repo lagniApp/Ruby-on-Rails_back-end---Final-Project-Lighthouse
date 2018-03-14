@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20180309172015) do
   create_table "coupons", force: :cascade do |t|
     t.text "description"
     t.integer "quantity"
-    t.datetime "remaining"
+    t.integer "remaining"
     t.bigint "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
