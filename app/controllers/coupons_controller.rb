@@ -21,9 +21,23 @@ class CouponsController < ApplicationController
 
   # POST /coupons
   def create
+    parsed = JSON.parse(request.raw_post)
+    puts parsed
+    coupon_params = {
+      restaurant_id: parsed['restaurantId'],
+      description: parsed['description'],
+      quantity: parsed['quantity'],
+      created_at: Time.now,
+      updated_at: Time.now,
+      
+      # tags: parsed['tags']
+    }
+
+    puts coupon_params
+
     @coupon = Coupon.new(coupon_params)
 
-    if @coupon.save
+    if @coupon.save!
       render json: @coupon, status: :created, location: @coupon
     else
       render json: @coupon.errors, status: :unprocessable_entity
@@ -52,6 +66,6 @@ class CouponsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def coupon_params
-      params.require(:coupon).permit(:description, :quantity, :remaining, :restaurant_id)
+      params.require(:coupon).permit(:description, :quantity, :restaurant_id)
     end
 end
