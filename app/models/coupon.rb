@@ -1,6 +1,7 @@
 class Coupon < ApplicationRecord
   belongs_to :restaurant
-  has_and_belongs_to_many :tags
+  has_many :coupons_tags
+  has_many :tags, through: :coupons_tags
 
 
   def as_json(options={})

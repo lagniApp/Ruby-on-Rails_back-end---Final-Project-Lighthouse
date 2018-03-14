@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-  has_and_belongs_to_many :coupons
+  has_many :coupons_tags
+  has_many :coupons, through: :coupons_tags
 end
