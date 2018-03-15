@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sms_message: MyString
+  string: MyString
+  user_phone: MyString
+  string: MyString
+
+two:
+  sms_message: MyString
+  string: MyString
+  user_phone: MyString
+  string: MyString
