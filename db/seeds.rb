@@ -153,7 +153,7 @@ restaurant_list = [
 
 # generate tags
 
-total_tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
+total_tags = ['beer', 'wine', 'cocktail', 'pizza',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
 tag_list = []
 
@@ -167,7 +167,7 @@ coupon_list = []
 
 # coupons that expired Dec
 
-30.times do |i|
+54.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
   coup = restaurant_list[random_num].coupons.create!({
@@ -183,7 +183,7 @@ end
 
 # coupons that are expired Jan
 
-45.times do |i|
+94.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
   coup = restaurant_list[random_num].coupons.create!({
@@ -198,8 +198,36 @@ end
 end
 
 # coupons that are expired Feb
+  # Feb 1
+24.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 2, 1)
 
-73.times do |i|
+  })
+  coupon_list << coup
+end
+  # Feb 8
+30.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 2, 8)
+
+  })
+  coupon_list << coup
+end
+  # Feb 15
+65.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
   coup = restaurant_list[random_num].coupons.create!({
@@ -212,10 +240,8 @@ end
   })
   coupon_list << coup
 end
-
-# coupons that are expired March
-
-70.times do |i|
+  # Feb 22
+53.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
   coup = restaurant_list[random_num].coupons.create!({
@@ -223,7 +249,51 @@ end
     quantity: quantity,
     remaining: quantity,
     expired: false,
-    expiration_time: Time.new(2018, 3, 15)
+    expiration_time: Time.new(2018, 2, 22)
+
+  })
+  coupon_list << coup
+end
+
+# coupons that are expired March
+  # March 1
+30.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 3, 1)
+
+  })
+  coupon_list << coup
+end
+  # March 8
+40.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 3, 8)
+
+  })
+  coupon_list << coup
+end
+  # March 15
+45.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 3, 1)
 
   })
   coupon_list << coup
@@ -245,9 +315,9 @@ end
 end
 
 def generate_random_tag (arr)
-  random_int = rand(0..9)
+  random_int = rand(0..8)
   while arr.include?(random_int) do
-    random_int = rand(0..9)
+    random_int = rand(0..8)
   end
   arr << random_int
 end
