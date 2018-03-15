@@ -20,17 +20,17 @@ class CouponsController < ApplicationController
   # POST /coupons
   def create
     parsed = JSON.parse(request.raw_post)
-    @restaurant = Restaurant.find(parsed['restaurantId'])
 
     coupon_params = {
       restaurant_id: parsed['restaurantId'],
       description: parsed['description'],
       remaining: parsed['quantity'],
       quantity: parsed['quantity'],
+      # expiration_time: (Time.now + parsed['hours']),
       created_at: Time.now,
       updated_at: Time.now
     }
-
+    byebug
     @coupon = @restaurant.coupons.new(coupon_params)
     get_tags(parsed)
 
