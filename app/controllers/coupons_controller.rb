@@ -1,8 +1,6 @@
 class CouponsController < ApplicationController
   before_action :set_coupon, only: [:show, :update, :destroy]
 
-
-  console
   # GET /coupons
   def index
     # @coupons = Restaurant.coupons
@@ -21,10 +19,23 @@ class CouponsController < ApplicationController
 
   # POST /coupons
   def create
-    @coupon = Coupon.new(coupon_params)
+    parsed = JSON.parse(request.raw_post)
 
-    if @coupon.save
-      render json: @coupon, status: :created, location: @coupon
+    coupon_params = {
+      restaurant_id: parsed['restaurantId'],
+      description: parsed['description'],
+      remaining: parsed['quantity'],
+      quantity: parsed['quantity'],
+      # expiration_time: (Time.now + parsed['hours']),
+      created_at: Time.now,
+      updated_at: Time.now
+    }
+    byebug
+    @coupon = @restaurant.coupons.new(coupon_params)
+    get_tags(parsed)
+
+    if @coupon.save!
+      render json: @coupon, status: :created
     else
       render json: @coupon.errors, status: :unprocessable_entity
     end
@@ -46,12 +57,30 @@ class CouponsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_coupon
+    def set_coupons
       @coupon = Coupon.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def coupon_params
-      params.require(:coupon).permit(:description, :quantity, :remaining, :restaurant_id)
+      params.require(:coupon).permit(:description, :quantity, :restaurant_id)
+    end
+
+    def get_tags(parsed)
+      @parsed_tags = []
+
+      parsed['tags'].each do |keys, value|
+        if value
+      testeTag = Tag.find_by(cuisine: keys)
+      @parsed_tags.push({
+        valid: value,
+        cuisine: keys,
+        created_at: Time.now,
+        updated_at: Time.now
+      })
+      @coupon.tags << testeTag
+      puts @coupon.tags
+      end
+    end
     end
 end
