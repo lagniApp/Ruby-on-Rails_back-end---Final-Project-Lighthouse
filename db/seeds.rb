@@ -23,123 +23,223 @@ Tag.destroy_all
 
 puts "Re-creating Restaurants ..."
 
-restaurant_list = []
-restaurant_location = [{:latitude => 43.653908, :longitude => -79.384293},
-  {:latitude => 43.642509, :longitude => -79.387039},
-  {:latitude => 43.644966, :longitude => -79.396751},
-  {:latitude => 43.648539, :longitude => -79.395937},
-  {:latitude => 34.412382, :longitude => -80.350175}]
-
 # generate restaurants
 
-5.times do |i|
-  restaurant =  Restaurant.create!({
-      name: Faker::Superhero.name,
-      username: Faker::Name.first_name,
-      email: Faker::Internet.email,
-      password: Faker::Internet.password(8),
-      phone: Faker::PhoneNumber.cell_phone,
-      address: Faker::Address.street_address,
-      balance: rand(25...60),
-      longitude: restaurant_location[i][:longitude],
-      latitude: restaurant_location[i][:latitude]
-      })
-  restaurant_list << restaurant
-end
+restaurant_list = [
+  Restaurant.create!({
+    name: 'Le Sélect Bistro',
+    username: 'Diego',
+    email: 'bk@diego.com',
+    password: 'password',
+    phone: Faker::PhoneNumber.cell_phone,
+    address: '432 Wellington St W, Toronto, ON M5V 1E3',
+    balance: 49,
+    longitude: -79.3990349,
+    latitude: 43.6438895
+  }),
+  Restaurant.create!({
+    name: "Cibo Wine Bar",
+    username: "CiboKing",
+    email: "cibo@google.com",
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "522 King St W, Toronto, ON M5V 1L7",
+    balance: 30,
+    longitude: -79.4220807,
+    latitude: 43.6405251
+  }),
+  Restaurant.create!({
+    name: "Wahlburgers Toronto",
+    username: "scaramouche",
+    email: "scara@google.com",
+    password: "123456789",
+    phone: "8726481118",
+    address: "Blue Jays Way, Toronto, ON M5V 2G5",
+    balance: 35,
+    longitude: -79.4002503,
+    latitude: 43.6814114,
+  }),
+  Restaurant.create!({
+    name: "Figo Toronto",
+    username: "scaramouche",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "295 Adelaide St W, Toronto, ON M5V 1P7",
+    balance: 35,
+    longitude: -79.3934346,
+    latitude: 43.6466882,
+  }),
+  Restaurant.create!({
+    name: "Gusto 101",
+    username: "scaramouche",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "101 Portland St, Toronto, ON M5V 2N3",
+    balance: 35,
+    longitude: -79.400712,
+    latitude: 43.6444597,
+  }),
+  Restaurant.create!({
+    name: "The Citizen",
+    username: "scaramouche",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "522 King St W, Toronto, ON M5V 1K4",
+    balance: 35,
+    longitude: -79.3993313,
+    latitude: 43.6453238,
+  }),
+  Restaurant.create!({
+    name: "PAI",
+    username: "scaramouche",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "18 Duncan St, Toronto, ON M5H 3G8",
+    balance: 35,
+    longitude: -79.3904049,
+    latitude: 43.64683,
+  }),
+  Restaurant.create!({
+    name: "Wide Open",
+    username: "CiboKing",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "139A Spadina Ave, Toronto, ON M5V 2L7",
+    balance: 30,
+    longitude: -79.3977877,
+    latitude: 43.6475849
+  }),
+  Restaurant.create!({
+    name: "Rodney’s Oyster House",
+    username: "CiboKing",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "469 King St W, Toronto, ON M5V 1K4",
+    balance: 30,
+    longitude: -79.3977877,
+    latitude: 43.6475849
+  }),
 
-restaurant1 = Restaurant.create!({
-  name: 'Burger King',
-  username: 'Diego',
-  email: 'bk@diego.com',
-  password: 'password',
-  phone: '6479671111',
-  address: '46 Spadina Ave.',
-  balance: 49,
-  longitude: -79.39500357,
-  latitude: 43.64480087
-})
+  Restaurant.create!({
+    name: "Luckee",
+    username: "CiboKing",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "328 Wellington St W, Toronto, ON M5V 3T4",
+    balance: 30,
+    longitude: -79.394848,
+    latitude: 43.6461641
+  }),
 
-restaurant2 = Restaurant.create!({
-  name: "Cibo",
-  username: "CiboKing",
-  email: "cibo@google.com",
-  password: "123456789",
-  phone: "6478799876",
-  address: "522 King St W, Toronto, ON M5V 1L7",
-  balance: 30,
-  longitude: -79.3974043,
-  latitude: 43.6452414
-})
+  Restaurant.create!({
+    name: "Macho Tex Mex Radio Bar",
+    username: "CiboKing",
+    email: Faker::Internet.email,
+    password: "123456789",
+    phone: Faker::PhoneNumber.cell_phone,
+    address: "92 Fort York Blvd, Toronto, ON M5V 4A7",
+    balance: 30,
+    longitude: -79.3993326,
+    latitude: 43.6394405
+  })
+]
 
-restaurant3 = Restaurant.create!({
-  name: "Scaramouche",
-  username: "scaramouche",
-  email: "scara@google.com",
-  password: "123456789",
-  phone: "8726481118",
-  address: "1 Benvenuto Pl, Toronto, ON M4V 2L1",
-  balance: 35,
-  longitude: -79.4002503,
-  latitude: 43.6814114,
-})
-
+# generate tags
 
 total_tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
 tag_list = []
 
-# generate tags
-
 total_tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
   tag_list << newTag
 }
 
+# generate coupons
+
 coupon_list = []
 
-def generate_message
-  beginning_deal = "#{Faker::Food.dish} $#{rand(5..10)} off,"
-  middle_deal = " #{Faker::Food.dish} $#{rand(5..10)} off,"
-  end_deal = "#{Faker::Food.dish} $#{rand(5..10)} off"
-  message = ""
-  totalMeals = rand(2..4)
-  totalMeals.times do |i|
-    if i == 0
-      message << beginning_deal
-    elsif i == totalMeals - 1
-      message << end_deal
-    else
-      message << middle_deal
-    end
-  end
-  return message
+# coupons that expired Dec
+
+30.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2017, 12, 15)
+
+  })
+  coupon_list << coup
 end
 
-# generate 20 coupons
+# coupons that are expired Jan
 
-coupon1 = restaurant1.coupons.create!({
-  description: 'Half off large pepperoni pizza',
-  quantity: '20',
-  remaining: '2011'
-})
-coupon2 = restaurant2.coupons.create!({
-  description: 'More beer for less!',
-  quantity: '10',
-  remaining: '2011'
-})
-coupon3 = restaurant3.coupons.create!({
-  description: 'Wine',
-  quantity: '30',
-  remaining: '2011'
-})
+45.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 1, 15)
 
+  })
+  coupon_list << coup
+end
+
+# coupons that are expired Feb
+
+73.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 2, 15)
+
+  })
+  coupon_list << coup
+end
+
+# coupons that are expired March
+
+70.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
+    quantity: quantity,
+    remaining: quantity,
+    expired: false,
+    expiration_time: Time.new(2018, 3, 15)
+
+  })
+  coupon_list << coup
+end
+
+# coupons that are valid
 
 20.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
   coup = restaurant_list[random_num].coupons.create!({
-    description: generate_message,
+    description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
-    remaining: quantity
+    remaining: quantity,
+    expired: true,
+    expiration_time: Time.new(2018, 3, 16)
   })
   coupon_list << coup
 end
@@ -161,13 +261,6 @@ coupon_list.each { |coupon, i|
     coupon.tags << tag_list[val]
   }
 }
-
-coupon1.tags << tag_list[3]
-coupon1.tags << tag_list[5]
-coupon2.tags << tag_list[6]
-coupon2.tags << tag_list[1]
-coupon3.tags << tag_list[3]
-coupon3.tags << tag_list[1]
 
 
 
