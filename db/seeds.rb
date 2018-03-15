@@ -97,25 +97,13 @@ end
 #   cuisine: 'Wine'
 # })
 
-tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
+total_tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
 tag_list = []
 
-tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
+total_tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
   tag_list << newTag
 }
-
-
-
-# # 20.times do
-# #   Product.create!(
-# #     name: Faker::Commerce.product_name,
-# #     price: rand(20000) / 100.00,
-# #     quantity: rand(100)
-# #   )
-# # end
-
-# restaurant1 = Restaurant.find_or_create_by! name: 'Burger King'
 
 # coupon1 = restaurant1.coupons.create!({
 #   description: 'Half off large pepperoni pizza',
@@ -133,9 +121,108 @@ tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
 #   remaining: '2011'
 # })
 
+coupon_list = []
+
+def generate_message
+  beginning_deal = "#{Faker::Food.dish} $#{rand(5..10)} off,"
+  middle_deal = " #{Faker::Food.dish} $#{rand(5..10)} off,"
+  end_deal = "#{Faker::Food.dish} $#{rand(5..10)} off"
+  message = ""
+  totalMeals = rand(2..4)
+  totalMeals.times do |i|
+    if i == 0
+      message << beginning_deal
+    elsif i == totalMeals - 1
+      message << end_deal
+    else
+      message << middle_deal
+    end
+  end
+  return message
+end
+
+20.times do |i|
+  random_num = rand(0..4)
+  quantity = rand(15..25)
+  coup = restaurant_list[random_num].coupons.create!({
+    description: generate_message,
+    quantity: quantity,
+    remaining: quantity
+  })
+  coupon_list << coup
+end
+
+
+  # generate random number of tags for each coupon
+  # random_num_tags = rand(1..4)
+  # random_tag = tag_list[rand(0..19)]
+
+  # random_num_tags.times do |i|
+  #   coupon_list[i].tags << random_tag
+  # end
+
+# coupon_list.each { |coupon, i|
+#   random_num_tags = rand(1..4)
+#   tags = []
+
+#   random_num_tags.times do |i|
+#       diff_tag = rand(0..19)
+#       tags << diff_tag
+#     if (tags.include? diff_tag)
+#       newTag = rand(0..19)
+
+#       coupon.tags << tag_list[newTag]
+#     else
+#       coupon.tags << tag_list[diff_tag]
+#     end
+#   end
+# }
+
+def generate_random_tag (arr)
+  random_int = rand(0..19)
+  while (arr.index(random_int) > -1)
+    arr << random_int
+  end
+end
+
+x = 0;
+arr = [];
+random_num_tags = rand(1..4)
+
+while x < random_num_tags
+  generate_random_tag(arr)
+  x+= 1
+end
+
+puts arr
+
+# random_num_tags = rand(1..4)
+# random_nummm = rand(0..19)
+# random_2 = rand(0..19)
+# # put
+
+# #   # random_num_tags.times do |i|
+#     # coupon_list[1].tags << tag_list[1]
+#     coupon_list[1].tags << tag_list[random_nummm]
+#     if (random_2 == random_nummm)
+#       coupon_list[1].tags << tag_list[random_2]
+#     end
+#   # end
+
+    # coupon_list[1].tags << tag_list[random_nummm]
+    # coupon_list[1].tags << tag_list[1]
+
+
+# coupon_list[1].tags << tag_list[1]
+
+
 # coupon1.tags << tag1
 # coupon1.tags << tag2
 # coupon2.tags << tag3
 # coupon2.tags << tag4
 # coupon3.tags << tag1
 # coupon3.tags << tag4
+
+
+
+
