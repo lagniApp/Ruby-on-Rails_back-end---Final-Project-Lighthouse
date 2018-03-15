@@ -21,19 +21,19 @@ class CouponsController < ApplicationController
   def create
     parsed = JSON.parse(request.raw_post)
     @restaurant = Restaurant.find_by(id: parsed['restaurantId'])
-    hours = (parsed['how_long'].to_i)
-
+    hours = (parsed['how_long'].to_i) * 60 * 60  
     coupon_params = {
       restaurant_id: parsed['restaurantId'],
       description: parsed['description'],
       quantity: parsed['quantity'],
       remaining: parsed['quantity'],
-      # expiration_time: (Time.now + minutes),
+      expiration_time: (Time.now + hours),
       created_at: Time.now,
       updated_at: Time.now
     }
 
     @coupon = @restaurant.coupons.new(coupon_params)
+    # byebug
     get_tags(parsed)
       if @coupon.save!
           response = { message: "Coupon created" }
@@ -81,14 +81,14 @@ class CouponsController < ApplicationController
 
       parsed['tags'].each do |keys, value|
         if value
-          testeTag = Tag.find_by(cuisine: keys)
+          tagged = Tag.find_by(cuisine: keys)
           @parsed_tags.push({
-            valid: value,
             cuisine: keys,
             created_at: Time.now,
             updated_at: Time.now
           })
-        @coupon.tags << testeTag
+          # byebug
+        @coupon.tags << tagged
         end
       end
     end
