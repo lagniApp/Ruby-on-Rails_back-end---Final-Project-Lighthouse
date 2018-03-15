@@ -2,7 +2,7 @@ require 'geokit'
 
 class Admin::RestaurantsController < ApplicationController
   include Geokit::Geocoders
-  # http_basic_authenticate_with name: ENV['USERADMIN'], password: ENV['PASSWORD']
+  # http_basic_authenticate_with name: ENV['USERADMIN'], password: ENV['PASSWORDADMIN']
 
   # def index
   #   @restaurants = Restaurant.order(id: :desc).all
@@ -30,10 +30,10 @@ class Admin::RestaurantsController < ApplicationController
 
     puts "SERVER SIDE"
     
-    @restaurant = Restaurant.create!(params)
+    @restaurant = Restaurant.new(params)
+    get_lat_lng(@restaurant)
     
-    if @restaurant
-      get_lat_lng(@restaurant)
+    if @restaurant.save
       # puts @restaurant.latitude
       render json: @restaurant, status: :created
     else
