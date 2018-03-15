@@ -41,7 +41,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'faker'
-  gem 'factory_bot'
   gem 'web-console', '~> 3.5', '>= 3.5.1'
 end
 
