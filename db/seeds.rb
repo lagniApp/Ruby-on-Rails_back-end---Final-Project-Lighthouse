@@ -180,21 +180,22 @@ end
 
 def generate_random_tag (arr)
   random_int = rand(0..19)
-  while (arr.index(random_int) > -1)
-    arr << random_int
+  while arr.include?(random_int) do
+    random_int = rand(0..19)
   end
+  arr << random_int
 end
 
 x = 0;
-arr = [];
+anArr = [];
 random_num_tags = rand(1..4)
 
-while x < random_num_tags
-  generate_random_tag(arr)
+while x < random_num_tags do
+  generate_random_tag(anArr)
   x+= 1
 end
 
-puts arr
+puts anArr
 
 # random_num_tags = rand(1..4)
 # random_nummm = rand(0..19)
