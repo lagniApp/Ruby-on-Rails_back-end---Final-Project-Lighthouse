@@ -30,6 +30,7 @@ restaurant_location = [{:latitude => 43.653908, :longitude => -79.384293},
   {:latitude => 43.648539, :longitude => -79.395937},
   {:latitude => 34.412382, :longitude => -80.350175}]
 
+# generate restaurants
 
 5.times do |i|
   restaurant =  Restaurant.create!({
@@ -46,80 +47,15 @@ restaurant_location = [{:latitude => 43.653908, :longitude => -79.384293},
   restaurant_list << restaurant
 end
 
-
-# restaurant1 = Restaurant.create!({
-#   name: 'Burger King',
-#   username: 'Diego',
-#   email: 'bk@diego.com',
-#   password: 'password',
-#   phone: '6479671111',
-#   address: '46 Spadina Ave.',
-#   balance: 49,
-#   longitude: -79.39500357,
-#   latitude: 43.64480087
-# })
-
-# restaurant2 = Restaurant.create!({
-#   name: "Cibo",
-#   username: "CiboKing",
-#   email: "cibo@google.com",
-#   password: "123456789",
-#   phone: "6478799876",
-#   address: "522 King St W, Toronto, ON M5V 1L7",
-#   balance: 30,
-#   longitude: -79.3974043,
-#   latitude: 43.6452414
-# })
-
-# restaurant3 = Restaurant.create!({
-#   name: "Scaramouche",
-#   username: "scaramouche",
-#   email: "scara@google.com",
-#   password: "123456789",
-#   phone: "8726481118",
-#   address: "1 Benvenuto Pl, Toronto, ON M4V 2L1",
-#   balance: 35,
-#   longitude: -79.4002503,
-#   latitude: 43.6814114,
-# })
-
-
-# tag1 = Tag.create!({
-#   cuisine: 'Pizza'
-# })
-# tag2 = Tag.create!({
-#   cuisine: 'Burrito'
-# })
-# tag3 = Tag.create!({
-#   cuisine: 'Hamburger'
-# })
-# tag4 = Tag.create!({
-#   cuisine: 'Wine'
-# })
-
 total_tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
 tag_list = []
 
+# generate tags
+
 total_tags.each { |tag, i| newTag = Tag.create!({cuisine: tag})
   tag_list << newTag
 }
-
-# coupon1 = restaurant1.coupons.create!({
-#   description: 'Half off large pepperoni pizza',
-#   quantity: '20',
-#   remaining: '2011'
-# })
-# coupon2 = restaurant2.coupons.create!({
-#   description: 'More beer for less!',
-#   quantity: '10',
-#   remaining: '2011'
-# })
-# coupon3 = restaurant3.coupons.create!({
-#   description: 'Wine',
-#   quantity: '30',
-#   remaining: '2011'
-# })
 
 coupon_list = []
 
@@ -141,6 +77,8 @@ def generate_message
   return message
 end
 
+# generate 20 coupons
+
 20.times do |i|
   random_num = rand(0..4)
   quantity = rand(15..25)
@@ -152,77 +90,24 @@ end
   coupon_list << coup
 end
 
-
-  # generate random number of tags for each coupon
-  # random_num_tags = rand(1..4)
-  # random_tag = tag_list[rand(0..19)]
-
-  # random_num_tags.times do |i|
-  #   coupon_list[i].tags << random_tag
-  # end
-
-# coupon_list.each { |coupon, i|
-#   random_num_tags = rand(1..4)
-#   tags = []
-
-#   random_num_tags.times do |i|
-#       diff_tag = rand(0..19)
-#       tags << diff_tag
-#     if (tags.include? diff_tag)
-#       newTag = rand(0..19)
-
-#       coupon.tags << tag_list[newTag]
-#     else
-#       coupon.tags << tag_list[diff_tag]
-#     end
-#   end
-# }
-
 def generate_random_tag (arr)
-  random_int = rand(0..19)
+  random_int = rand(0..9)
   while arr.include?(random_int) do
-    random_int = rand(0..19)
+    random_int = rand(0..9)
   end
   arr << random_int
 end
 
-x = 0;
-anArr = [];
-random_num_tags = rand(1..4)
+coupon_list.each { |coupon, i|
+  arr = []
+  rand(1..4).times do
+    generate_random_tag(arr)
+  end
+  arr.each { |val, index|
+    coupon.tags << tag_list[val]
+  }
+}
 
-while x < random_num_tags do
-  generate_random_tag(anArr)
-  x+= 1
-end
-
-puts anArr
-
-# random_num_tags = rand(1..4)
-# random_nummm = rand(0..19)
-# random_2 = rand(0..19)
-# # put
-
-# #   # random_num_tags.times do |i|
-#     # coupon_list[1].tags << tag_list[1]
-#     coupon_list[1].tags << tag_list[random_nummm]
-#     if (random_2 == random_nummm)
-#       coupon_list[1].tags << tag_list[random_2]
-#     end
-#   # end
-
-    # coupon_list[1].tags << tag_list[random_nummm]
-    # coupon_list[1].tags << tag_list[1]
-
-
-# coupon_list[1].tags << tag_list[1]
-
-
-# coupon1.tags << tag1
-# coupon1.tags << tag2
-# coupon2.tags << tag3
-# coupon2.tags << tag4
-# coupon3.tags << tag1
-# coupon3.tags << tag4
 
 
 
