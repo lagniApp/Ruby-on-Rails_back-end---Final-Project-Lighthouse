@@ -153,7 +153,7 @@ restaurant_list = [
 
 # generate tags
 
-total_tags = ['beer', 'wine', 'cocktail', 'pizza',
+total_tags = ['beer', 'wine', 'cocktail', 'pizza', 'food',
   'burrito', 'hamburger', 'pasta', 'sushi', 'steak']
 tag_list = []
 
@@ -315,9 +315,9 @@ end
 end
 
 def generate_random_tag (arr)
-  random_int = rand(0..8)
+  random_int = rand(0..9)
   while arr.include?(random_int) do
-    random_int = rand(0..8)
+    random_int = rand(0..9)
   end
   arr << random_int
 end
