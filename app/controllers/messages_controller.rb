@@ -16,6 +16,7 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     parsed = JSON.parse(request.raw_post)
+
     puts parsed["messageData"]["restName"]
     params = {
       
@@ -44,7 +45,7 @@ class MessagesController < ApplicationController
   #   end
 
   #   # Only allow a trusted parameter "white list" through.
-  #   def message_params
-  #     params.require(:message).permit(:sms_message, :string, :user_phone, :string)
-  #   end
+    # def message_params
+    #   params.require(:message).permit(:sms_message, :string, :user_phone, :string)
+    # end
 end
