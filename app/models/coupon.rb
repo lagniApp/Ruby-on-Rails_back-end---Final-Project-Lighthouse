@@ -2,6 +2,10 @@ class Coupon < ApplicationRecord
   belongs_to :restaurant
   has_and_belongs_to_many :tags
 
+  # validation restaurant_id, presence: true 
+  # validation description, presence: true
+  # validation quantity, presence: true 
+  # validation remaining, presence: true 
 
   def as_json(options={})
     {

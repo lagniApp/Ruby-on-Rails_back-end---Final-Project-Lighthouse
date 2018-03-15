@@ -97,7 +97,7 @@ class RestaurantsController < ApplicationController
       meetup_params = { 
         lon: restaurant.longitude, 
         lat: restaurant.latitude, 
-        radius: 1, 
+        radius: 2, 
         status: 'upcoming', 
         format: 'json', 
         page: '500'

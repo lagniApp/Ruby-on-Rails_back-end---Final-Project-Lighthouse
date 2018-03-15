@@ -1,5 +1,5 @@
 class CouponsController < ApplicationController
-  before_action :set_coupon, only: [:show, :update, :destroy]
+  # before_action :set_coupon, only: [:show, :update, :destroy]
 
   # GET /coupons
   def index
@@ -20,26 +20,28 @@ class CouponsController < ApplicationController
   # POST /coupons
   def create
     parsed = JSON.parse(request.raw_post)
+    @restaurant = Restaurant.find_by(id: parsed['restaurantId'])
+    hours = (parsed['how_long'].to_i)
 
     coupon_params = {
       restaurant_id: parsed['restaurantId'],
       description: parsed['description'],
-      remaining: parsed['quantity'],
       quantity: parsed['quantity'],
-      # expiration_time: (Time.now + parsed['hours']),
+      remaining: parsed['quantity'],
+      # expiration_time: (Time.now + minutes),
       created_at: Time.now,
       updated_at: Time.now
     }
-    byebug
+
     @coupon = @restaurant.coupons.new(coupon_params)
     get_tags(parsed)
-
-    if @coupon.save!
-      render json: @coupon, status: :created
-    else
-      render json: @coupon.errors, status: :unprocessable_entity
+      if @coupon.save!
+          response = { message: "Coupon created" }
+        else
+          response = { message: "Not created, please check the fields" }
+        end
+      render json: response
     end
-  end
 
   # PATCH/PUT /coupons/1
   def update
@@ -52,7 +54,15 @@ class CouponsController < ApplicationController
 
   # DELETE /coupons/1
   def destroy
-    @coupon.destroy
+    @coupon = set_coupons
+    timer = (@coupon.created_at + 600)
+    if (timer > Time.now)
+      @coupon.destroy!
+      response = { message: "Deleted" }
+    else
+      response = { message: "Not deleted, you exceded the time limite of 10 minutes to delete a coupon", error: "Not valid" }
+    end
+    render json: response
   end
 
   private
@@ -63,7 +73,7 @@ class CouponsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def coupon_params
-      params.require(:coupon).permit(:description, :quantity, :restaurant_id)
+      params.require(:coupon).permit(:restaurant_id, :description, :quantity, :remaining, :created_at)
     end
 
     def get_tags(parsed)
@@ -71,16 +81,15 @@ class CouponsController < ApplicationController
 
       parsed['tags'].each do |keys, value|
         if value
-      testeTag = Tag.find_by(cuisine: keys)
-      @parsed_tags.push({
-        valid: value,
-        cuisine: keys,
-        created_at: Time.now,
-        updated_at: Time.now
-      })
-      @coupon.tags << testeTag
-      puts @coupon.tags
+          testeTag = Tag.find_by(cuisine: keys)
+          @parsed_tags.push({
+            valid: value,
+            cuisine: keys,
+            created_at: Time.now,
+            updated_at: Time.now
+          })
+        @coupon.tags << testeTag
+        end
       end
-    end
     end
 end
