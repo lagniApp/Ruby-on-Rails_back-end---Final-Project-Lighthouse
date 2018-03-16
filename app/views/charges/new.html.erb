@@ -17,7 +17,25 @@
 
     <script type="text/javascript">
     let amount = 0
-    document.getElementById('reload_20').value
+    document.getElementById('reload_20').checked = true
+    document.getElementById('reload_20').onclick = () => {
+        amount = 20
+        console.log(amount)
+    }
+    document.getElementById('reload_30').onclick = () => {
+        amount = 30
+        console.log(amount)
+    }
+    document.getElementById('reload_50').onclick = () => {
+        amount = 50
+        console.log(amount)
+    }
+    document.getElementById('reload_100').onclick = () => {
+        amount = 100
+        console.log(amount)
+    }
+
+
     if (document.getElementById('reload_20').checked) {
         amount = 20
     } else if (document.getElementById('reload_30').checked) {
@@ -36,6 +54,6 @@
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="Lagni App Reload"
             data-label="Reload"
-            data-amount=amount
+            data-amount="`${amount}`"
             data-locale="auto"></script>
   <% end %>

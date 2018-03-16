@@ -6,7 +6,7 @@ class ChargesController < ActionController::Base
     def create
       # Amount in cents
       # always set on server side
-      @amount = 50
+      @amount = 500000
     
     #   customer = Stripe::Customer.create(
     #     # :email => params[:stripeEmail],
