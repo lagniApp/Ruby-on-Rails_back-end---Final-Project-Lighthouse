@@ -420,12 +420,13 @@ end
    else 
     remaining = rand(10..quantity)
   end
+  time = Time.now + 9.hours
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
     remaining: remaining,
     expired: false,
-    expiration_time: Time.new(2018, 3, 16)
+    expiration_time: time
   })
   coupon_list << coup
 end

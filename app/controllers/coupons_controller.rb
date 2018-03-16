@@ -4,12 +4,15 @@ class CouponsController < ApplicationController
   # GET /coupons
   def index
     # @coupons = Restaurant.coupons
-    @coupons = Coupon.where(expired: false)
+    @coupons = Coupon.where(expired: false).where("expiration_time > ?", DateTime.now)
     # @coupons.each do |coupon|
     #   coupon[:restaurant] = Restaurant.find_by_id(coupon.restaurant_id)
     #   # coupon.merge( {:restaurant => Restaurant.find_by_id(coupon.restaurant_id) } )
     # end
     render json: @coupons
+
+    # update all expired coupons to true
+    Coupon.where(expired: false).where("expiration_time < ?", DateTime.now).update_all(expired: true)
   end
 
   # GET /coupons/1
@@ -21,7 +24,7 @@ class CouponsController < ApplicationController
   def create
     parsed = JSON.parse(request.raw_post)
     @restaurant = Restaurant.find_by(id: parsed['restaurantId'])
-    hours = (parsed['how_long'].to_i) * 60 * 60  
+    hours = (parsed['how_long'].to_i) * 60 * 60
     coupon_params = {
       restaurant_id: parsed['restaurantId'],
       description: parsed['description'],
