@@ -4,7 +4,7 @@ class CouponsController < ApplicationController
   # GET /coupons
   def index
     # @coupons = Restaurant.coupons
-    @coupons = Coupon.all
+    @coupons = Coupon.where(expired: false)
     # @coupons.each do |coupon|
     #   coupon[:restaurant] = Restaurant.find_by_id(coupon.restaurant_id)
     #   # coupon.merge( {:restaurant => Restaurant.find_by_id(coupon.restaurant_id) } )
