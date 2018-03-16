@@ -170,7 +170,13 @@ coupon_list = []
 80.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -187,7 +193,13 @@ end
 114.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -204,7 +216,13 @@ end
 150.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -221,7 +239,13 @@ end
 220.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -238,7 +262,13 @@ end
 60.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -253,7 +283,13 @@ end
 80.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -268,7 +304,13 @@ end
 90.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -283,7 +325,13 @@ end
 73.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -300,7 +348,13 @@ end
 88.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -315,7 +369,13 @@ end
 101.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -330,7 +390,13 @@ end
 121.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
@@ -347,7 +413,13 @@ end
 15.times do |i|
   random_num = rand(0..10)
   quantity = rand(15..25)
-  remaining = rand(1..quantity)
+  if (random_num < 4) 
+    remaining = rand(1..5)
+   elsif (random_num < 8)
+    remaining = rand(5..10)
+   else 
+    remaining = rand(10..quantity)
+  end
   time = Time.now + 9.hours
   coup = restaurant_list[random_num].coupons.create!({
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
