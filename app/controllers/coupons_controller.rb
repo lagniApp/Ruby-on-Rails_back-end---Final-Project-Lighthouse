@@ -14,6 +14,7 @@ class CouponsController < ApplicationController
 
   # GET /coupons/1
   def show
+    set_coupons
     render json: @coupon
   end
 
@@ -33,7 +34,7 @@ class CouponsController < ApplicationController
     }
 
     @coupon = @restaurant.coupons.new(coupon_params)
-    # byebug
+    
     get_tags(parsed)
       if @coupon.save!
           response = { message: "Coupon created" }
