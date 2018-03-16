@@ -168,7 +168,7 @@ coupon_list = []
 # coupons that expired Oct
 
 80.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -185,7 +185,7 @@ end
 # coupons that expired Nov
 
 114.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -202,7 +202,7 @@ end
 # coupons that expired Dec
 
 150.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -219,7 +219,7 @@ end
 # coupons that are expired Jan
 
 220.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -236,7 +236,7 @@ end
 # coupons that are expired Feb
   # Feb 1
 60.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -251,7 +251,7 @@ end
 end
   # Feb 8
 80.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -266,7 +266,7 @@ end
 end
   # Feb 15
 90.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -281,7 +281,7 @@ end
 end
   # Feb 22
 73.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -298,7 +298,7 @@ end
 # coupons that are expired March
   # March 1
 88.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -313,7 +313,7 @@ end
 end
   # March 8
 101.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -328,7 +328,7 @@ end
 end
   # March 15
 121.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
@@ -345,7 +345,7 @@ end
 # coupons that are valid
 
 15.times do |i|
-  random_num = rand(0..4)
+  random_num = rand(0..10)
   quantity = rand(15..25)
   remaining = rand(1..quantity)
   coup = restaurant_list[random_num].coupons.create!({
