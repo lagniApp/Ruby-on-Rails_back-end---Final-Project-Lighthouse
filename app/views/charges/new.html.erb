@@ -1,14 +1,41 @@
-#checkout page to add value to restaurant account
+
 <%= form_tag charges_path do %>
-    <article>
-      <label class="amount">
-        <span>Amount: $5.00</span>
-      </label>
-    </article>
+
+    <h3> Select reload amount </h3>
+
+    <%= radio_button_tag(:reload, "20") %>
+    <%= label_tag(:reload_20, "Reload $20") %>
+
+    <%= radio_button_tag(:reload, "30") %>
+    <%= label_tag(:reload_30, "Reload $30") %>
+    
+    <%= radio_button_tag(:reload, "50") %>
+    <%= label_tag(:reload_50, "Reload $50") %>
+
+    <%= radio_button_tag(:reload, "100") %>
+    <%= label_tag(:reload_100, "Reload $100") %>
+
+    <script type="text/javascript">
+    let amount = 0
+    document.getElementById('reload_20').value
+    if (document.getElementById('reload_20').checked) {
+        amount = 20
+    } else if (document.getElementById('reload_30').checked) {
+        amount = 30
+    } else if (document.getElementById('reload_50').checked) {
+        amount = 50
+    } else if (document.getElementById('reload_100').checked) {
+        amount = 100
+    } else {
+        amount = 0
+    }
+    console.log(amount)
+    </script>
   
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    <script src="https://checkout.stripe.com/checkout.js" id="stripe-button" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="A month's subscription"
-            data-amount="500"
+            data-description="Lagni App Reload"
+            data-label="Reload"
+            data-amount=amount
             data-locale="auto"></script>
   <% end %>
