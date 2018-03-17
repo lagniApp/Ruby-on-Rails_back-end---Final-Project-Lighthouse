@@ -109,9 +109,10 @@ class RestaurantsController < ApplicationController
   end
 
   def charge
-    byebug
+   
     charge = JSON.parse(request.body.read)
-    amount = charge["amount"]
+    amount = (charge["amount"].to_i) * 100
+  
     token = charge["token"]["id"]
 
     begin
@@ -122,13 +123,11 @@ class RestaurantsController < ApplicationController
         :source  => token
       )  
       # Charge went through
-      puts "success"
       render json: {status: "ok", message: "Charge when through"}, status: :ok
-      # Send back something nice
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to :root
-      render json: {status: "error", message: "Charge when through"}, status: :ok
+      render json: {status: "error", message: "Charge Not Completed"}, status: :bad_request
     end
   end
 
