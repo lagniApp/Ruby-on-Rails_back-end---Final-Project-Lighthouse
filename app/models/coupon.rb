@@ -13,7 +13,7 @@ class Coupon < ApplicationRecord
       description: description,
       quantity: quantity,
       remaining: remaining,
-      expired: expired,
+      # expired: expired,
       expiration_time: expiration_time,
       restaurant_id: restaurant_id,
       created_at: created_at,
