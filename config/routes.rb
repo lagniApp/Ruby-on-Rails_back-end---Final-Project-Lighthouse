@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :messages, only: [:create]
-  resources :coupons, only: [:index]
-  resources :charges, only: [:new, :create]
+  resources :coupons, only: [:index, :show]
+  resources :tags, only: [:index]
   resources :restaurants, only: [:index, :show,  :new, :create] do
-    resources :coupons, only: [:index, :show, :new, :create] 
+    resources :coupons
   end
   # post 'restaurants' => 'restaurants#login'
   # resources :tags

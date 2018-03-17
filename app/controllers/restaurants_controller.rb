@@ -7,8 +7,15 @@ class RestaurantsController < ApplicationController
   # GET /restaurants
   def index
     @restaurants = Restaurant.all
-
-    render json: @restaurants
+    @found = [];
+    @restaurants.each do |restaurant|
+      couponsJSON = []
+      couponsJSON = Coupon.where(restaurant_id: restaurant.id)
+      findRestaurant = Restaurant.where(id: restaurant.id).first
+      findRestaurant.couponsJSON = couponsJSON
+      @found.push(findRestaurant)
+    end
+    render json: @found
   end
 
   # GET /restaurants/1
@@ -97,7 +104,7 @@ class RestaurantsController < ApplicationController
       meetup_params = { 
         lon: restaurant.longitude, 
         lat: restaurant.latitude, 
-        radius: 1, 
+        radius: 2, 
         status: 'upcoming', 
         format: 'json', 
         page: '500'
