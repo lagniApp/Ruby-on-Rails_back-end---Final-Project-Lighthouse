@@ -66,11 +66,69 @@ class RestaurantsController < ApplicationController
     else
       render json: @restaurant.errors, status: :unprocessable_entity
     end
+   # Amount in cents
+      # always set on server side
+
+      # @amount = (params["reload"].to_i) * 100
+      # puts @amount
+    
+    #   customer = Stripe::Customer.create(
+    #     # :email => params[:stripeEmail],
+    #     :source  => params[:stripeToken]
+    #   )
+    # Token is created using Checkout or Elements!
+    # # Get the payment token ID submitted by the form:
+    # token = params[:stripeToken]
+
+    #   charge = Stripe::Charge.create(
+    #     :amount      => @amount,
+    #     :description => 'Lagni App reload',
+    #     :currency    => 'cad',
+    #     :source  => token
+    #   )
+  #  if charge.status == "succeeded"
+  #   puts "YAY"
+  #  else 
+  #   puts "NOOO"
+  #  end
+  #   # puts charge_response
+  #   render json: charge
+
+
+    # rescue Stripe::CardError => e
+    #   flash[:error] = e.message
+    #   redirect_to :root
+    # end
+
+
   end
 
   # DELETE /restaurants/1
   def destroy
     @restaurant.destroy
+  end
+
+  def charge
+   
+    charge = JSON.parse(request.body.read)
+    amount = (charge["amount"].to_i) * 100
+  
+    token = charge["token"]["id"]
+
+    begin
+      charge = Stripe::Charge.create(
+        :amount      => amount,
+        :description => 'Lagni App reload',
+        :currency    => 'cad',
+        :source  => token
+      )  
+      # Charge went through
+      render json: {status: "ok", message: "Charge when through"}, status: :ok
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to :root
+      render json: {status: "error", message: "Charge Not Completed"}, status: :bad_request
+    end
   end
 
   private
@@ -140,5 +198,7 @@ class RestaurantsController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       Time.zone.at(date / 1000).strftime("%B %e, %Y at %I:%M %p")
     end
+
+   
 
 end

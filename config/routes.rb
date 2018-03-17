@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :tags, only: [:index]
   resources :restaurants, only: [:index, :show,  :new, :create] do
     resources :coupons
+    post '/charges', to: "restaurants#charge"
   end
   # post 'restaurants' => 'restaurants#login'
   # resources :tags
-
   namespace :admin do
     root to: 'dashboard#show'
     resources :restaurants, except: [:show]
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   root to: 'coupons#index'
 
+
+  # get 'charges/new' => 'charges#new'
   # resources :products, only: [:index, :show] do
   #   resources :reviews, only: [:create, :destroy]
   # end
