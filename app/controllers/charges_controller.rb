@@ -6,7 +6,9 @@ class ChargesController < ActionController::Base
     def create
       # Amount in cents
       # always set on server side
-      @amount = 500000
+
+      @amount = (params["reload"].to_i) * 100
+      puts @amount
     
     #   customer = Stripe::Customer.create(
     #     # :email => params[:stripeEmail],
@@ -22,15 +24,22 @@ class ChargesController < ActionController::Base
         :currency    => 'cad',
         :source  => token
       )
-   
-    puts charge.status
-    puts charge.amount
+   if charge.status == "succeeded"
+    puts "YAY"
+   else 
+    puts "NOOO"
+   end
     # puts charge_response
     render json: charge
+
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to :root
     end
+
+
+
+
 
 end
