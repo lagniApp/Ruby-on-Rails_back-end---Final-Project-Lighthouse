@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :tags, only: [:index]
   resources :restaurants, only: [:index, :show,  :new, :create] do
     resources :coupons
+    post '/charges', to: "restaurants#charge"
   end
   # post 'restaurants' => 'restaurants#login'
   # resources :tags
