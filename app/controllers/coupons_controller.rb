@@ -4,7 +4,7 @@ class CouponsController < ApplicationController
   # GET /coupons
   def index
     # @coupons = Restaurant.coupons
-    @coupons = Coupon.where(expired: false).where("expiration_time > ?", DateTime.now)
+    @coupons = Coupon.where(expired: false).where("expiration_time > ?", DateTime.now).where("remaining > 0")
     # @coupons.each do |coupon|
     #   coupon[:restaurant] = Restaurant.find_by_id(coupon.restaurant_id)
     #   # coupon.merge( {:restaurant => Restaurant.find_by_id(coupon.restaurant_id) } )
@@ -13,6 +13,7 @@ class CouponsController < ApplicationController
 
     # update all expired coupons to true
     Coupon.where(expired: false).where("expiration_time < ?", DateTime.now).update_all(expired: true)
+    Coupon.where(expired: false).where("remaining > 0").update_all(expired: true)
   end
 
   # GET /coupons/1
@@ -37,7 +38,7 @@ class CouponsController < ApplicationController
     }
 
     @coupon = @restaurant.coupons.new(coupon_params)
-    
+
     get_tags(parsed)
       if @coupon.save!
           response = { message: "Coupon created" }
