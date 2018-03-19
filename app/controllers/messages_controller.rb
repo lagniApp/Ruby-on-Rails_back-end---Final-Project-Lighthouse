@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
       puts a.remaining
       phone = params[:phone]
 
-      message = "Here is your Coupon for #{params[:restName]} #{params[:couponInfo]} at #{params[:address]}"
+      message = "Here is your Coupon for #{params[:restName]} #{params[:couponInfo]} at #{params[:address]} Link localhost:3000/coupons/#{params[:id]}"
       TwilioTextMessenger.new(message, phone).call
     # if @message
     #   render json: @message, status: :created, location: @message
