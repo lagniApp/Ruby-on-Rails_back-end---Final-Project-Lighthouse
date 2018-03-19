@@ -13,7 +13,7 @@ class CouponsController < ApplicationController
 
     # update all expired coupons to true
     Coupon.where(expired: false).where("expiration_time < ?", DateTime.now).update_all(expired: true)
-    Coupon.where(expired: false).where("remaining > 0").update_all(expired: true)
+    Coupon.where(expired: false).where("remaining <= 0").update_all(expired: true)
   end
 
   # GET /coupons/1

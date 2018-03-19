@@ -16,6 +16,8 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     parsed = JSON.parse(request.raw_post)
+    puts parsed
+    byebug
     puts parsed["messageData"]["restName"]
     params = {
 
@@ -29,6 +31,7 @@ class MessagesController < ApplicationController
 
     # subtract coupon's ramaining column by 1
       a = Coupon.find(params[:id])
+      puts a
       puts a.remaining
       update_db(params[:id])
       puts a.remaining
