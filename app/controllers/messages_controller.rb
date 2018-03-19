@@ -16,6 +16,8 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     parsed = JSON.parse(request.raw_post)
+    puts parsed
+    byebug
     puts parsed["messageData"]["restName"]
     params = {
 
@@ -29,12 +31,13 @@ class MessagesController < ApplicationController
 
     # subtract coupon's ramaining column by 1
       a = Coupon.find(params[:id])
+      puts a
       puts a.remaining
       update_db(params[:id])
       puts a.remaining
       phone = params[:phone]
 
-      message = "Here is your Coupon for #{params[:restName]} #{params[:couponInfo]} at #{params[:address]}"
+      message = "Here is your Coupon for #{params[:restName]} #{params[:couponInfo]} at #{params[:address]} Link localhost:3000/coupons/#{params[:id]}"
       TwilioTextMessenger.new(message, phone).call
     # if @message
     #   render json: @message, status: :created, location: @message

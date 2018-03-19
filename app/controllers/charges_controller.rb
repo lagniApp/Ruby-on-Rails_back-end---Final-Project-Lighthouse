@@ -5,7 +5,7 @@ class ChargesController < ActionController::Base
     def create
       # Amount in cents
       # always set on server side
-
+      puts params["restaurant_id"]
       @amount = (params["reload"].to_i) * 100
       puts @amount
     
@@ -25,6 +25,7 @@ class ChargesController < ActionController::Base
       )
    if charge.status == "succeeded"
     puts "YAY"
+    add_charge(5, 100)
    else 
     puts "NOOO"
    end
@@ -38,7 +39,13 @@ class ChargesController < ActionController::Base
     end
 
 
+  private
 
+  def add_charge(id, amount)
+    # restaurant.balance += amount
+    puts "add_charge"
+    puts id
+  end
 
 
 end
