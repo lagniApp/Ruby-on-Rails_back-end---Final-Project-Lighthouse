@@ -25,7 +25,7 @@ class RestaurantsController < ApplicationController
     @restaurant.meetups = @meets
     @couponsJSON = Coupon.where(restaurant_id: @restaurant.id)
     # @couponsJSON.sort_by {|a| a.created_at}
-    @restaurant.couponsJSON = @couponsJSON    
+    @restaurant.couponsJSON = @couponsJSON
     # byebug
     render json: @restaurant
   end
@@ -36,9 +36,9 @@ class RestaurantsController < ApplicationController
     # request.raw_post
     # data = JSON.parse(data.data)
     # @restaurant = Restaurant.find_by_email(params[:email])
-    
+
     if @restaurant = Restaurant.authenticate_with_credentials(params[:email], params[:password])
-    # if @restaurant 
+    # if @restaurant
       # puts @restaurant.id
     # if @restaurant && @restaurant.password === params[:password]
       # session[:restaurant_id] = @restaurant.id
@@ -50,7 +50,7 @@ class RestaurantsController < ApplicationController
 
     # @restaurant = Restaurant.new(restaurant_params)
     # get_lat_lng(@restaurant)
-    
+
     # if @restaurant.save
     #   session[:restaurant_id] = @restaurant.id
     #   render json: @restaurant, status: :created, location: @restaurant
@@ -74,8 +74,53 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
   end
 
+  def charge
+   puts "charge begin"
+    charge = JSON.parse(request.body.read)
+    amount = (charge["amount"].to_i) * 100
+    token = charge["token"]["id"]
+    restId = charge["restid"]
+
+    puts "restid #{restId}"
+    puts "amount #{amount}"
+
+    puts "#{charge["restid"]} rest ID"
+    begin
+      charge = Stripe::Charge.create(
+        :amount      => amount,
+        :description => 'Lagni App reload',
+        :currency    => 'cad',
+        :source  => token
+      )
+      # Charge went through
+      add_charge(restId, amount/100)
+      render json: {status: "ok", message: "Charge when through"}, status: :ok
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to :root
+      render json: {status: "error", message: "Charge Not Completed"}, status: :bad_request
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def add_charge(id, amount)
+      restaurant = Restaurant.find(id)
+            puts "amount #{restaurant.balance}"
+
+      puts "restaurant #{restaurant}"
+      restaurant.balance += amount
+      puts "restid #{id}"
+      puts "amount #{restaurant.balance}"
+
+      if restaurant.update_attribute('balance', restaurant.balance)
+        puts "#{amount} added to restaurant"
+      else
+        puts "error"
+      end
+    end
+
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
     end
@@ -83,14 +128,14 @@ class RestaurantsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def restaurant_params
       params.permit(
-        :name, 
-        :username, 
-        :email, 
-        :password, 
-        :phone, 
-        :address, 
-        :balance, 
-        :longitude, 
+        :name,
+        :username,
+        :email,
+        :password,
+        :phone,
+        :address,
+        :balance,
+        :longitude,
         :latitude
         )
     end
@@ -102,12 +147,12 @@ class RestaurantsController < ApplicationController
     end
 
     def meetup_params(restaurant)
-      meetup_params = { 
-        lon: restaurant.longitude, 
-        lat: restaurant.latitude, 
-        radius: 2, 
-        status: 'upcoming', 
-        format: 'json', 
+      meetup_params = {
+        lon: restaurant.longitude,
+        lat: restaurant.latitude,
+        radius: 2,
+        status: 'upcoming',
+        format: 'json',
         page: '500'
       }
     end
@@ -120,18 +165,19 @@ class RestaurantsController < ApplicationController
         if @events["results"][i] == nil
           return meetups_arr
         end
-        if 
+        if
           @events["results"][i]["yes_rsvp_count"] > 30 &&
           @events["results"][i]["name"] != @events["results"][i-1]["name"]
-          
+
           meetups_arr.push({
             name: @events["results"][i]["name"],
             ppl_yes: @events["results"][i]["yes_rsvp_count"],
             distance: @events["results"][i]["distance"] * 100,
-            date: time_zone(@events["results"][i]["time"])
+            date: time_zone(@events["results"][i]["time"]),
+            event_url: @events["results"][i]["event_url"]
           })
         end
-        
+
         i = i + 1
       end
       return meetups_arr
@@ -141,5 +187,7 @@ class RestaurantsController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       Time.zone.at(date / 1000).strftime("%B %e, %Y at %I:%M %p")
     end
+
+
 
 end
