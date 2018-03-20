@@ -80,10 +80,7 @@ class RestaurantsController < ApplicationController
     amount = (charge["amount"].to_i) * 100
     token = charge["token"]["id"]
     restId = charge["restid"]
-
-    puts "restid #{restId}"
-    puts "amount #{amount}"
-
+    
     puts "#{charge["restid"]} rest ID"
     begin
       charge = Stripe::Charge.create(
@@ -91,7 +88,7 @@ class RestaurantsController < ApplicationController
         :description => 'Lagni App reload',
         :currency    => 'cad',
         :source  => token
-      )
+      )  
       # Charge went through
       add_charge(restId, amount/100)
       render json: {status: "ok", message: "Charge when through"}, status: :ok
@@ -107,12 +104,7 @@ class RestaurantsController < ApplicationController
 
     def add_charge(id, amount)
       restaurant = Restaurant.find(id)
-            puts "amount #{restaurant.balance}"
-
-      puts "restaurant #{restaurant}"
       restaurant.balance += amount
-      puts "restid #{id}"
-      puts "amount #{restaurant.balance}"
 
       if restaurant.update_attribute('balance', restaurant.balance)
         puts "#{amount} added to restaurant"
@@ -187,7 +179,4 @@ class RestaurantsController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       Time.zone.at(date / 1000).strftime("%B %e, %Y at %I:%M %p")
     end
-
-
-
 end
