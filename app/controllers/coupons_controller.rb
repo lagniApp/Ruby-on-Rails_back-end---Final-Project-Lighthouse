@@ -31,6 +31,7 @@ class CouponsController < ApplicationController
       description: parsed['description'],
       quantity: parsed['quantity'],
       remaining: parsed['quantity'],
+      expired: false,
       expiration_time: (Time.now + hours),
       created_at: Time.now,
       updated_at: Time.now
@@ -39,11 +40,19 @@ class CouponsController < ApplicationController
     @coupon = @restaurant.coupons.new(coupon_params)
     
     get_tags(parsed)
+    
+    @ammount = (@coupon.quantity * 0.25) 
+
+    if @restaurant.balance > @ammount
+      @restaurant.balance - @ammount
       if @coupon.save!
           response = { message: "Coupon created" }
         else
           response = { message: "Not created, please check the fields" }
         end
+      else 
+        response = { message: "Not enough credit, please make a recharge"}
+      end
       render json: response
     end
 

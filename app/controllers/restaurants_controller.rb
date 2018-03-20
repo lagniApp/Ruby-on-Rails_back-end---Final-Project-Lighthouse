@@ -24,8 +24,9 @@ class RestaurantsController < ApplicationController
     @meets = meetup_api(@meetup_params)
     @restaurant.meetups = @meets
     @couponsJSON = Coupon.where(restaurant_id: @restaurant.id)
-    @restaurant.couponsJSON = @couponsJSON
-
+    # @couponsJSON.sort_by {|a| a.created_at}
+    @restaurant.couponsJSON = @couponsJSON    
+    # byebug
     render json: @restaurant
   end
 
