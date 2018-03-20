@@ -109,12 +109,13 @@ class RestaurantsController < ApplicationController
   end
 
   def charge
-   
+   puts "charge begin"
     charge = JSON.parse(request.body.read)
     amount = (charge["amount"].to_i) * 100
-  
     token = charge["token"]["id"]
+    restId = charge["restid"]
 
+    puts "#{charge["restid"]} rest ID"
     begin
       charge = Stripe::Charge.create(
         :amount      => amount,
@@ -123,6 +124,7 @@ class RestaurantsController < ApplicationController
         :source  => token
       )  
       # Charge went through
+      add_charge(restId, amount/100)
       render json: {status: "ok", message: "Charge when through"}, status: :ok
     rescue Stripe::CardError => e
       flash[:error] = e.message
@@ -133,6 +135,14 @@ class RestaurantsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def add_charge(id, amount)
+      restaurant = Restaurant.find(id)
+      restaurant.balance += amount
+      restaurant.save
+      puts "#{amount} added to restaurant"
+    end
+
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
     end
