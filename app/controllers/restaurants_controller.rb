@@ -66,41 +66,6 @@ class RestaurantsController < ApplicationController
     else
       render json: @restaurant.errors, status: :unprocessable_entity
     end
-   # Amount in cents
-      # always set on server side
-
-      # @amount = (params["reload"].to_i) * 100
-      # puts @amount
-    
-    #   customer = Stripe::Customer.create(
-    #     # :email => params[:stripeEmail],
-    #     :source  => params[:stripeToken]
-    #   )
-    # Token is created using Checkout or Elements!
-    # # Get the payment token ID submitted by the form:
-    # token = params[:stripeToken]
-
-    #   charge = Stripe::Charge.create(
-    #     :amount      => @amount,
-    #     :description => 'Lagni App reload',
-    #     :currency    => 'cad',
-    #     :source  => token
-    #   )
-  #  if charge.status == "succeeded"
-  #   puts "YAY"
-  #  else 
-  #   puts "NOOO"
-  #  end
-  #   # puts charge_response
-  #   render json: charge
-
-
-    # rescue Stripe::CardError => e
-    #   flash[:error] = e.message
-    #   redirect_to :root
-    # end
-
-
   end
 
   # DELETE /restaurants/1
@@ -139,8 +104,11 @@ class RestaurantsController < ApplicationController
     def add_charge(id, amount)
       restaurant = Restaurant.find(id)
       restaurant.balance += amount
-      restaurant.save
-      puts "#{amount} added to restaurant"
+      if restaurant.save
+        puts "#{amount} added to restaurant"
+      else 
+        puts "error"
+      end
     end
 
     def set_restaurant
