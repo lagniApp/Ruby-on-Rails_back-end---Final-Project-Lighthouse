@@ -25,7 +25,7 @@ class RestaurantsController < ApplicationController
     @restaurant.meetups = @meets
     @couponsJSON = Coupon.where(restaurant_id: @restaurant.id)
     # @couponsJSON.sort_by {|a| a.created_at}
-    @restaurant.couponsJSON = @couponsJSON    
+    @restaurant.couponsJSON = @couponsJSON
     # byebug
     render json: @restaurant
   end
@@ -36,9 +36,9 @@ class RestaurantsController < ApplicationController
     # request.raw_post
     # data = JSON.parse(data.data)
     # @restaurant = Restaurant.find_by_email(params[:email])
-    
+
     if @restaurant = Restaurant.authenticate_with_credentials(params[:email], params[:password])
-    # if @restaurant 
+    # if @restaurant
       # puts @restaurant.id
     # if @restaurant && @restaurant.password === params[:password]
       # session[:restaurant_id] = @restaurant.id
@@ -50,7 +50,7 @@ class RestaurantsController < ApplicationController
 
     # @restaurant = Restaurant.new(restaurant_params)
     # get_lat_lng(@restaurant)
-    
+
     # if @restaurant.save
     #   session[:restaurant_id] = @restaurant.id
     #   render json: @restaurant, status: :created, location: @restaurant
@@ -80,7 +80,7 @@ class RestaurantsController < ApplicationController
     amount = (charge["amount"].to_i) * 100
     token = charge["token"]["id"]
     restId = charge["restid"]
-
+    
     puts "#{charge["restid"]} rest ID"
     begin
       charge = Stripe::Charge.create(
@@ -105,9 +105,10 @@ class RestaurantsController < ApplicationController
     def add_charge(id, amount)
       restaurant = Restaurant.find(id)
       restaurant.balance += amount
-      if restaurant.save
+
+      if restaurant.update_attribute('balance', restaurant.balance)
         puts "#{amount} added to restaurant"
-      else 
+      else
         puts "error"
       end
     end
@@ -119,14 +120,14 @@ class RestaurantsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def restaurant_params
       params.permit(
-        :name, 
-        :username, 
-        :email, 
-        :password, 
-        :phone, 
-        :address, 
-        :balance, 
-        :longitude, 
+        :name,
+        :username,
+        :email,
+        :password,
+        :phone,
+        :address,
+        :balance,
+        :longitude,
         :latitude
         )
     end
@@ -138,12 +139,12 @@ class RestaurantsController < ApplicationController
     end
 
     def meetup_params(restaurant)
-      meetup_params = { 
-        lon: restaurant.longitude, 
-        lat: restaurant.latitude, 
-        radius: 2, 
-        status: 'upcoming', 
-        format: 'json', 
+      meetup_params = {
+        lon: restaurant.longitude,
+        lat: restaurant.latitude,
+        radius: 2,
+        status: 'upcoming',
+        format: 'json',
         page: '500'
       }
     end
@@ -156,7 +157,7 @@ class RestaurantsController < ApplicationController
         if @events["results"][i] == nil
           return meetups_arr
         end
-        if 
+        if
           @events["results"][i]["yes_rsvp_count"] > 30 &&
           @events["results"][i]["name"] != @events["results"][i-1]["name"]
 
@@ -168,7 +169,7 @@ class RestaurantsController < ApplicationController
             event_url: @events["results"][i]["event_url"]
           })
         end
-        
+
         i = i + 1
       end
       return meetups_arr
@@ -178,7 +179,4 @@ class RestaurantsController < ApplicationController
       Time.zone = 'Eastern Time (US & Canada)'
       Time.zone.at(date / 1000).strftime("%B %e, %Y at %I:%M %p")
     end
-
-   
-
 end

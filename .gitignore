@@ -16,3 +16,6 @@
 !/tmp/.keep
 
 .byebug_history
+
+secrets.yml
+

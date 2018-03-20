@@ -17,7 +17,6 @@ class MessagesController < ApplicationController
   def create
     parsed = JSON.parse(request.raw_post)
     puts parsed
-    byebug
     puts parsed["messageData"]["restName"]
     params = {
 
