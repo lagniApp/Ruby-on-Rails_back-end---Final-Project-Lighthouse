@@ -41,17 +41,20 @@ class CouponsController < ApplicationController
     @coupon = @restaurant.coupons.new(coupon_params)
 
     get_tags(parsed)
-    
-    @ammount = (@coupon.quantity * 0.25) 
+
+    @ammount = (@coupon.quantity * 0.25)
 
     if @restaurant.balance > @ammount
-      @restaurant.balance - @ammount
+      @restaurant.balance -= @ammount
+      puts @restaurant.balance
+      @restaurant.update_attribute('balance', @restaurant.balance)
+
       if @coupon.save!
           response = { message: "Coupon created" }
         else
           response = { message: "Not created, please check the fields" }
         end
-      else 
+      else
         response = { message: "Not enough credit, please make a recharge"}
       end
       render json: response

@@ -80,7 +80,7 @@ class RestaurantsController < ApplicationController
     amount = (charge["amount"].to_i) * 100
     token = charge["token"]["id"]
     restId = charge["restid"]
-    
+
     puts "#{charge["restid"]} rest ID"
     begin
       charge = Stripe::Charge.create(
@@ -88,10 +88,10 @@ class RestaurantsController < ApplicationController
         :description => 'Lagni App reload',
         :currency    => 'cad',
         :source  => token
-      )  
+      )
       # Charge went through
       add_charge(restId, amount/100)
-      render json: {status: "ok", message: "Charge when through"}, status: :ok
+      render json: {status: "ok", message: "Charge when through", amount: amount}, status: :ok
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to :root
