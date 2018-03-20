@@ -180,12 +180,13 @@ class RestaurantsController < ApplicationController
         if 
           @events["results"][i]["yes_rsvp_count"] > 30 &&
           @events["results"][i]["name"] != @events["results"][i-1]["name"]
-          
+
           meetups_arr.push({
             name: @events["results"][i]["name"],
             ppl_yes: @events["results"][i]["yes_rsvp_count"],
             distance: @events["results"][i]["distance"] * 100,
-            date: time_zone(@events["results"][i]["time"])
+            date: time_zone(@events["results"][i]["time"]),
+            event_url: @events["results"][i]["event_url"]
           })
         end
         
