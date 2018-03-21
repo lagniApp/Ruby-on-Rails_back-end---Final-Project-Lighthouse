@@ -12,7 +12,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/config/secrets.yml
 !/log/.keep
 !/tmp/.keep
 
 .byebug_history
+
+secrets.yml
+
