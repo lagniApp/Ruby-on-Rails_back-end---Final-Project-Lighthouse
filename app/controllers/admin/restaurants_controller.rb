@@ -5,16 +5,6 @@ require 'faker'
 class Admin::RestaurantsController < ApplicationController
   include Geokit::Geocoders
   
-  # http_basic_authenticate_with name: ENV['USERADMIN'], password: ENV['PASSWORDADMIN']
-  
-  # def index
-  #   @restaurants = Restaurant.order(id: :desc).all
-  # end
-  
-  # def new
-  #   @restaurant = Restaurant.new
-  # end
-  
   def create
     parsed = JSON.parse(request.raw_post)
     puts parsed
@@ -86,12 +76,6 @@ class Admin::RestaurantsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @restaurant = Restaurant.find params[:id]
-  #   @restaurant.destroy
-  #   redirect_to [:admin, :restaurants], notice: 'restaurant deleted!'
-  # end
-
   private
 
   def restaurant_params
@@ -103,8 +87,6 @@ class Admin::RestaurantsController < ApplicationController
         :phone, 
         :address, 
         :balance 
-        # :longitude, 
-        # :latitude
     )
   end
 

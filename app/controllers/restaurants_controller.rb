@@ -32,6 +32,11 @@ class RestaurantsController < ApplicationController
 
   # POST /restaurants
   def create
+    parsed = JSON.parse(request.raw_post)
+    params = {
+      email: parsed['email'],
+      password: parsed['password'],
+    }
     puts params
     # request.raw_post
     # data = JSON.parse(data.data)
