@@ -1,17 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :update, :destroy]
 
-  # # GET /messages
-  # def index
-  #   @messages = Message.all
-
-  #   render json: @messages
-  # end
-
-  # # GET /messages/1
-  # def show
-  #   render json: @message
-  # end
 
   # POST /messages
   def create

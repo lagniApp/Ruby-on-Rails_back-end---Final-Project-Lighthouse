@@ -67,8 +67,6 @@ class Admin::RestaurantsController < ApplicationController
       get_lat_lng(@restaurant)
       
       if @restaurant.save
-        # puts @restaurant.latitude
-        # ModelMailer.new_restaurant_notification(@restaurant).deliver
         render json: @restaurant, status: :created
       else
         render json: {error:'Wrong email or password'}
