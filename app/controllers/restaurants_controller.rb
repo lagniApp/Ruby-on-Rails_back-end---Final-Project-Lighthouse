@@ -6,16 +6,18 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants
   def index
-    @restaurants = Restaurant.all
-    @found = [];
-    @restaurants.each do |restaurant|
-      couponsJSON = []
-      couponsJSON = Coupon.where(restaurant_id: restaurant.id)
-      findRestaurant = Restaurant.where(id: restaurant.id).first
-      findRestaurant.couponsJSON = couponsJSON
-      @found.push(findRestaurant)
-    end
-    render json: @found
+    @restaurants = Restaurant.includes({coupons: :tags}).all.reverse
+    @restaurants = @restaurants.map { |r| AdminRestaurantSerializer.new(r) } 
+    # @found = [];
+    # @restaurants.each do |restaurant|
+    #   couponsJSON = []
+    #   couponsJSON = Coupon.where(restaurant_id: restaurant.id)
+    #   findRestaurant = Restaurant.where(id: restaurant.id).first
+    #   findRestaurant.couponsJSON = couponsJSON
+    #   @found.push(findRestaurant)
+    # end
+    render json: @restaurants
+    # , serializer: AdminRestaurantSerializer
   end
 
   # GET /restaurants/1
@@ -38,31 +40,14 @@ class RestaurantsController < ApplicationController
       password: parsed['password'],
     }
     puts params
-    # request.raw_post
-    # data = JSON.parse(data.data)
-    # @restaurant = Restaurant.find_by_email(params[:email])
 
     if @restaurant = Restaurant.authenticate_with_credentials(params[:email], params[:password])
-    # if @restaurant
-      # puts @restaurant.id
-    # if @restaurant && @restaurant.password === params[:password]
-      # session[:restaurant_id] = @restaurant.id
+
       render json: @restaurant, status: :created
-      # , location: "/restaurants/#{@restaurant.id}"
     else
-      render json: {error:'Wrong email or password'}
+      render json: {error:'Change your email or check you password'}
     end
 
-    # @restaurant = Restaurant.new(restaurant_params)
-    # get_lat_lng(@restaurant)
-
-    # if @restaurant.save
-    #   session[:restaurant_id] = @restaurant.id
-    #   render json: @restaurant, status: :created, location: @restaurant
-    # else
-    #   flash[:error] = 'An error occured!'
-    #   render json: @restaurant.errors, status: :unprocessable_entity
-    # end
   end
 
   # PATCH/PUT /restaurants/id

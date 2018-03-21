@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.5'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'geokit'
 gem 'geokit-rails'
 gem 'meetup_client'

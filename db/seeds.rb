@@ -103,52 +103,52 @@ restaurant_list = [
     longitude: -79.3904049,
     latitude: 43.64683,
   }),
-  Restaurant.create!({
-    name: "Wide Open",
-    username: "CiboKing",
-    email: Faker::Internet.email,
-    password: "123456789",
-    phone: Faker::PhoneNumber.cell_phone,
-    address: "139A Spadina Ave, Toronto, ON M5V 2L7",
-    balance: 30,
-    longitude: -79.3977877,
-    latitude: 43.6475849
-  }),
-  Restaurant.create!({
-    name: "Rodney’s Oyster House",
-    username: "CiboKing",
-    email: Faker::Internet.email,
-    password: "123456789",
-    phone: Faker::PhoneNumber.cell_phone,
-    address: "469 King St W, Toronto, ON M5V 1K4",
-    balance: 30,
-    longitude: -79.3977877,
-    latitude: 43.6475849
-  }),
+  # Restaurant.create!({
+  #   name: "Wide Open",
+  #   username: "CiboKing",
+  #   email: Faker::Internet.email,
+  #   password: "123456789",
+  #   phone: Faker::PhoneNumber.cell_phone,
+  #   address: "139A Spadina Ave, Toronto, ON M5V 2L7",
+  #   balance: 30,
+  #   longitude: -79.3977877,
+  #   latitude: 43.6475849
+  # }),
+  # Restaurant.create!({
+  #   name: "Rodney’s Oyster House",
+  #   username: "CiboKing",
+  #   email: Faker::Internet.email,
+  #   password: "123456789",
+  #   phone: Faker::PhoneNumber.cell_phone,
+  #   address: "469 King St W, Toronto, ON M5V 1K4",
+  #   balance: 30,
+  #   longitude: -79.3977877,
+  #   latitude: 43.6475849
+  # })
 
-  Restaurant.create!({
-    name: "Luckee",
-    username: "CiboKing",
-    email: Faker::Internet.email,
-    password: "123456789",
-    phone: Faker::PhoneNumber.cell_phone,
-    address: "328 Wellington St W, Toronto, ON M5V 3T4",
-    balance: 30,
-    longitude: -79.394848,
-    latitude: 43.6461641
-  }),
+  # Restaurant.create!({
+  #   name: "Luckee",
+  #   username: "CiboKing",
+  #   email: Faker::Internet.email,
+  #   password: "123456789",
+  #   phone: Faker::PhoneNumber.cell_phone,
+  #   address: "328 Wellington St W, Toronto, ON M5V 3T4",
+  #   balance: 30,
+  #   longitude: -79.394848,
+  #   latitude: 43.6461641
+  # }),
 
-  Restaurant.create!({
-    name: "Macho Tex Mex Radio Bar",
-    username: "CiboKing",
-    email: Faker::Internet.email,
-    password: "123456789",
-    phone: Faker::PhoneNumber.cell_phone,
-    address: "92 Fort York Blvd, Toronto, ON M5V 4A7",
-    balance: 30,
-    longitude: -79.3993326,
-    latitude: 43.6394405
-  })
+  # Restaurant.create!({
+  #   name: "Macho Tex Mex Radio Bar",
+  #   username: "CiboKing",
+  #   email: Faker::Internet.email,
+  #   password: "123456789",
+  #   phone: Faker::PhoneNumber.cell_phone,
+  #   address: "92 Fort York Blvd, Toronto, ON M5V 4A7",
+  #   balance: 30,
+  #   longitude: -79.3993326,
+  #   latitude: 43.6394405
+  # })
 ]
 
 # generate tags
@@ -168,8 +168,8 @@ coupon_list = []
 # coupons that expired Oct
 
 80.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -191,8 +191,8 @@ end
 # coupons that expired Nov
 
 114.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -214,8 +214,8 @@ end
 # coupons that expired Dec
 
 150.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -237,8 +237,8 @@ end
 # coupons that are expired Jan
 
 220.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -260,8 +260,8 @@ end
 # coupons that are expired Feb
   # Feb 1
 60.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -281,8 +281,8 @@ end
 end
   # Feb 8
 80.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -302,8 +302,8 @@ end
 end
   # Feb 15
 90.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -323,8 +323,8 @@ end
 end
   # Feb 22
 73.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -346,8 +346,8 @@ end
 # coupons that are expired March
   # March 1
 88.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -367,8 +367,8 @@ end
 end
   # March 8
 101.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -388,8 +388,8 @@ end
 end
   # March 15
 121.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
@@ -411,8 +411,8 @@ end
 # coupons that are valid
 
 15.times do |i|
-  random_num = rand(0..10)
-  quantity = rand(15..25)
+  random_num = rand(0..6)
+  quantity = rand(15..20)
   if (random_num < 4) 
     remaining = rand(1..5)
    elsif (random_num < 8)
