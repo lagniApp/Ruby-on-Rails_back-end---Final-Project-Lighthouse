@@ -50,7 +50,7 @@ class CouponsController < ApplicationController
       @restaurant.update_attribute('balance', @restaurant.balance)
 
       if @coupon.save!
-          response = { message: "Coupon created" }
+          response = { message: "Coupon created", coupon: @coupon }
         else
           response = { message: "Not created, please check the fields" }
         end
