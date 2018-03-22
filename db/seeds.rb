@@ -425,7 +425,7 @@ end
     description: "#{Faker::Food.dish} $#{rand(5..10)} off",
     quantity: quantity,
     remaining: remaining,
-    expired: false,
+    expired: true,
     expiration_time: time
   })
   coupon_list << coup
